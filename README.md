@@ -1,27 +1,39 @@
-# AngularBoilerplate
+# Angular Boilerplate
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.4.
+Angular base project that supports different build targets 🔥
 
-## Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+In order to run this project on your local machine, you will need some tools installed locally.
 
-## Code scaffolding
+### Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+It is recommended that you first install an IDE. Visual Studio Code is great. You should also have some idea about node and npm to get the project running.
 
-## Build
+In order to contribute to the project, knowledge of Angular will be needed as that is the framework for the project.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+You can install node by going to [their website](https://nodejs.org/en/). Once node is installed, install the Angular CLI globally:
 
-## Running unit tests
+```
+npm install -g @angular/cli
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installing
 
-## Running end-to-end tests
+Once you've cloned this project, you can cd into the project and install the dependencies using:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```
+npm install
+```
 
-## Further help
+Afterwards you can safely run:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+ng serve
+```
+
+And have the project served at http://localhost:4200.
+
+## Built With
+
+- [Angular](https://angular.io/) - The web framework used
