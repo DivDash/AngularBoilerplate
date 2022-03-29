@@ -31,23 +31,25 @@ After running the above command new directory (./dist) will be made in the root 
 Create a new project on Firebase by clicking on Hosting section in Side Panel with any project name.
 
 ```sh
-ng firebase login
+firebase login
 ```
 
 Run ng firebase init and initialize the project after answering few questions:
 
 ```sh
-ng firebase init
+firebase init
 ```
 
-1- Firebase CLI features…: Hosting.
-2- Public directory: Type in dist, because this is where your production-ready Angular app assets are.
-3- Configure as single-page app: Most of the time you’ll say yes (y) for this one.
-4- Overwrite index.html: No.
-5- Automatic builds: No.
+<ol>
+  <li>Firebase CLI features…: Hosting.</li>
+  <li>Public directory: Type in dist, because this is where your production-ready Angular app assets are.</li>
+  <li>Configure as single-page app: Most of the time you’ll say yes (y) for this one.</li>
+  <li>Overwrite index.html: No.</li>
+  <li>Automatic builds: No.</li>
+</ol>
 
 Use this command to deploy your production-ready app to Firebase Hosting:
 
 ```sh
-ng firebase deploy
+firebase deploy
 ```
