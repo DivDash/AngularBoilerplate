@@ -1,62 +1,62 @@
-# name: Web Firebase Deployment
+name: Web Firebase Deployment
 
-# on:
-#   push:
-#     branches: [ master ]
-# jobs:
-#   firebase-deploy:
-#     runs-on: ubuntu-latest
-    
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v1
-#       - name: Setup npm package
-#         run: npm install
-#       - name: Build Using npm
-#         run: node_modules/.bin/ng build
-#       - name: Deploy to Firebase
-#         uses: w9jds/firebase-action@master
-#         with:
-#             args: deploy --only hosting
-#         env:
-#             FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-name: Build and Deploy
 on:
   push:
-    branches:
-      - master
-
+    branches: [ master ]
 jobs:
-  build:
-    name: Build
+  firebase-deploy:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Install Dependencies
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup npm package
         run: npm install
-      - name: Build
-        run: npm run build
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: dist
-          path: dist
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: dist
-          path: dist
+      - name: Build Using npm
+        run: node_modules/.bin/ng build
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+            args: deploy --only hosting
         env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+            FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+# name: Build and Deploy
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   build:
+#     name: Build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@master
+#       - name: Install Dependencies
+#         run: npm install
+#       - name: Build
+#         run: npm run build
+#       - name: Archive Production Artifact
+#         uses: actions/upload-artifact@master
+#         with:
+#           name: dist
+#           path: dist
+#   deploy:
+#     name: Deploy
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Repo
+#         uses: actions/checkout@master
+#       - name: Download Artifact
+#         uses: actions/download-artifact@master
+#         with:
+#           name: dist
+#           path: dist
+#       - name: Deploy to Firebase
+#         uses: w9jds/firebase-action@master
+#         with:
+#           args: deploy --only hosting
+#         env:
+#           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
