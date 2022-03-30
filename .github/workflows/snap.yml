@@ -1,6 +1,9 @@
 
 name: Build Project on PR
-'on': pull_request
+on: 
+  push:
+    branches: [ mubashir ]
+# 'on': pull_request
 jobs:
   snap-build:
     runs-on: ubuntu-latest
