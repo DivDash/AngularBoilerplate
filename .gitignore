@@ -43,3 +43,6 @@ Thumbs.db
 
 # firebase
 /.firebase
+
+# release-builds
+/release-builds
