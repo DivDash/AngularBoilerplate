@@ -11,6 +11,7 @@ jobs:
       - name: Use Snapcraft
         run: snapcraft --help
       - name: snapcraft init
+        run: snapcraft init
 #       - name: Checkout
 #         uses: actions/checkout@v1
 #       - name: Setup npm package
