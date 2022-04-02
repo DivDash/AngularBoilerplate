@@ -3,18 +3,15 @@ on:
   push:
     branches: [mubashir]
 jobs:
-  date:
+  snap-build:
     runs-on: ubuntu-latest
     steps:
-      # Checkout the branch
-      - name: checkout
-        uses: actions/checkout@v2
-
-      - name: save current date
-        run: |
-          # do some operation that changes a file in the git repo
-          date > time.txt
-
+      - name: Install Snapcraft
+        uses: samuelmeuli/action-snapcraft@v1
+      - name: Use Snapcraft
+        run: snapcraft --help
+      - name: snapcraft init
+        run: snapcraft init
       - name: setup git config
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -26,7 +23,7 @@ jobs:
           # Stage the file, commit and push
           git add time.txt
           git commit -m "new date commit"
-          git push origin master
+          git push origin mubashir
 # name: Build Project on PR
 # on:
 #   push:
