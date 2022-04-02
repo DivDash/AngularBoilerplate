@@ -12,6 +12,10 @@ jobs:
         run: snapcraft --help
       - name: snapcraft init
         run: snapcraft init
+      - name: Commit report
+        run: |
+          git commit -am "Automated report"
+          git push
 #       - name: Checkout
 #         uses: actions/checkout@v1
 #       - name: Setup npm package
@@ -20,11 +24,11 @@ jobs:
 #         run: node_modules/.bin/ng build
 #       - name: snap package
 #         run: npm run package-linux
-      - uses: actions/checkout@v2
-      - uses: snapcore/action-build@v1
-        id: build
-      - uses: snapcore/action-publish@v1
-        with:
-          store_login: ${{ secrets.STORE_LOGIN }}
-          snap: ${{ steps.build.outputs.snap }}
-          release: edge
+#       - uses: actions/checkout@v2
+#       - uses: snapcore/action-build@v1
+#         id: build
+#       - uses: snapcore/action-publish@v1
+#         with:
+#           store_login: ${{ secrets.STORE_LOGIN }}
+#           snap: ${{ steps.build.outputs.snap }}
+#           release: edge
