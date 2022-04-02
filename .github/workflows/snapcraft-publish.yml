@@ -1,36 +1,65 @@
-name: Build Project on PR
+name: Commit date to master
 on:
   push:
     branches: [mubashir]
 jobs:
-  snap-build:
+  date:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Snapcraft
-        uses: samuelmeuli/action-snapcraft@v1
-      - name: Use Snapcraft
-        run: snapcraft --help
-      - name: snapcraft init
-        run: snapcraft init
-      - name: Commit report
+      # Checkout the branch
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: save current date
         run: |
-          git status
-          cwd
-          git commit -am "Automated report"
-          git push
-#       - name: Checkout
-#         uses: actions/checkout@v1
-#       - name: Setup npm package
-#         run: npm install
-#       - name: Build Using npm
-#         run: node_modules/.bin/ng build
-#       - name: snap package
-#         run: npm run package-linux
-#       - uses: actions/checkout@v2
-#       - uses: snapcore/action-build@v1
-#         id: build
-#       - uses: snapcore/action-publish@v1
-#         with:
-#           store_login: ${{ secrets.STORE_LOGIN }}
-#           snap: ${{ steps.build.outputs.snap }}
-#           release: edge
+          # do some operation that changes a file in the git repo
+          date > time.txt
+
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
+      - name: commit
+        run: |
+          # Stage the file, commit and push
+          git add time.txt
+          git commit -m "new date commit"
+          git push origin master
+# name: Build Project on PR
+# on:
+#   push:
+#     branches: [mubashir]
+# jobs:
+#   snap-build:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Install Snapcraft
+#         uses: samuelmeuli/action-snapcraft@v1
+#       - name: Use Snapcraft
+#         run: snapcraft --help
+#       - name: snapcraft init
+#         run: snapcraft init
+#       - name: Commit report
+#         run: |
+#           git status
+#           cwd
+#           git commit -am "Automated report"
+#           git push
+# #       - name: Checkout
+# #         uses: actions/checkout@v1
+# #       - name: Setup npm package
+# #         run: npm install
+# #       - name: Build Using npm
+# #         run: node_modules/.bin/ng build
+# #       - name: snap package
+# #         run: npm run package-linux
+# #       - uses: actions/checkout@v2
+# #       - uses: snapcore/action-build@v1
+# #         id: build
+# #       - uses: snapcore/action-publish@v1
+# #         with:
+# #           store_login: ${{ secrets.STORE_LOGIN }}
+# #           snap: ${{ steps.build.outputs.snap }}
+# #           release: edge
