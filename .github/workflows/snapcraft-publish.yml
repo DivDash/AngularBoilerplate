@@ -14,6 +14,8 @@ jobs:
         run: snapcraft init
       - name: Commit report
         run: |
+          git status
+          cwd
           git commit -am "Automated report"
           git push
 #       - name: Checkout
