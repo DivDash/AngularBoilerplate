@@ -36,7 +36,7 @@ Then set "name" key with registered app name in ./package.json
 ![](images/../../images/package.png)
 
 Also set "name" key with registered app name in snap/snapcraft.yaml
-![](images/../../images/snapcraft-img.png)
+![](images/../../images/snapcraft.png)
 
 Run npm run electron:package to build .snap file of your Electron App
 
@@ -71,7 +71,7 @@ sudo snap install <app-name>
 This is a Github Action that can be used to publish [snap
 packages](https://snapcraft.io) to the Snap Store built by [snapcore](https://github.com/snapcore/action-publish).
 
-![carbon(9)](https://user-images.githubusercontent.com/42158443/147774289-49e4197d-ddd8-4e00-9a94-e1fbd55a820b.png)
+![](images/../../images/action.png)
 
 This action is already written in [.github/workflows/sanpcraft.yaml](https://github.com/Efshal/boilerplate-monorepo/blob/main/.github/workflows/snapcraft-publish.yml), you have to first produce data using command below:
 
