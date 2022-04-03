@@ -1,4 +1,4 @@
-name: Linux Build on PR
+name: Linux Deploy on Merge
 on: 
   push:
     branches: [ master ]
