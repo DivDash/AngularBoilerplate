@@ -1,7 +1,9 @@
-name: Build Project on PR
-on:
+name: Snapcraft Publish Action
+
+on: 
   push:
-    branches: [mubashir]
+    branches: [ mubashir ]
+# 'on': pull_request
 jobs:
   snap-build:
     runs-on: ubuntu-latest
@@ -13,7 +15,7 @@ jobs:
       - name: Build Using npm
         run: node_modules/.bin/ng build
       - name: snap package
-        run: npm run package-win
+        run: npm run package-linux
       - uses: actions/checkout@v2
       - uses: snapcore/action-build@v1
         id: build
