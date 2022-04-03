@@ -33,8 +33,7 @@ Register your app name, following steps from this link
 https://snapcraft.io/docs/registering-your-app-name
 
 Then set "name" key with registered app name in ./package.json
-![](images/../../images/package-img.png)
-
+<img src="images/../../images/package-img.png" width="100%"
 
 Also set "name" key with registered app name in snap/snapcraft.yaml
 ![](images/../../images/snapcraft-img.png)
