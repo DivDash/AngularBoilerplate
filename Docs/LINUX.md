@@ -73,7 +73,7 @@ packages](https://snapcraft.io) to the Snap Store built by [snapcore](https://gi
 
 ![](images/../../images/action.png)
 
-This action is already written in [.github/workflows/sanpcraft.yaml](https://github.com/Efshal/boilerplate-monorepo/blob/main/.github/workflows/snapcraft-publish.yml), you have to first produce data using command below:
+This action is already written in [.github/workflows/sanpcraft.yaml](https://github.com/TelicSolutionsInc/AngularBoilerplate/blob/master/.github/workflows/deploy-linux.yml), you have to first produce data using command below:
 
 ```sh
 $ snapcraft export-login --snaps=PACKAGE_NAME \
