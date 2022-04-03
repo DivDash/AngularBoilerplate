@@ -33,10 +33,11 @@ Register your app name, following steps from this link
 https://snapcraft.io/docs/registering-your-app-name
 
 Then set "name" key with registered app name in ./package.json
-![](images/package-img.png)
+![](images/../../images/package-img.png)
+
 
 Also set "name" key with registered app name in snap/snapcraft.yaml
-![](images/snapcraft-img.png)
+![](images/../../images/snapcraft-img.png)
 
 Run npm run electron:package to build .snap file of your Electron App
 
