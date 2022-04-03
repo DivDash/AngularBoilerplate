@@ -5,7 +5,7 @@
 Clone the repo
 
 ```sh
-git clone https://github.com/Efshal/boilerplate-monorepo.git
+git clone https://github.com/TelicSolutionsInc/AngularBoilerplate.git
 ```
 
 Run npm install
@@ -34,6 +34,8 @@ https://snapcraft.io/docs/registering-your-app-name
 
 Then set "name" key with registered app name in package.json
 ![carbon](https://user-images.githubusercontent.com/42158443/147568704-6ee479c1-6999-4445-99b8-82f2a8866228.png)
+
+![alt text](https://ibb.co/wC6sb9t)
 
 Also set "name" key with registered app name in snapcraft.yaml
 ![carbon(1)](https://user-images.githubusercontent.com/42158443/147569091-5fbf1fbe-3c7b-4b3d-9404-0c5ad288b320.png)
