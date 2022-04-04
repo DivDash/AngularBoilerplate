@@ -40,6 +40,6 @@ jobs:
         if: steps.myCacheStep.outputs.cache-hit != 'true'
         run: npm install
       - name: Build Using npm
-        run: node_modules/.bin/ng build
+        run: ng build
       - name: snap package
         run: npm run package-linux
