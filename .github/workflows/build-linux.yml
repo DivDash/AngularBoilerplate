@@ -37,9 +37,9 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install Dependencies
-        if: steps.myCacheStep.outputs.cache-hit != 'true'
+#         if: steps.myCacheStep.outputs.cache-hit != 'true'
         run: npm install
-#       - name: Build Using npm
-#         run: npm run build
+      - name: Build Using npm
+        run: npm run build
       - name: snap package
         run: npm run package-linux
