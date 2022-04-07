@@ -1,10 +1,7 @@
 name: Linux Build on PR
-
-on:
-  push:
-    branches: [mubashir]
+'on': pull_request
 jobs:
-  cache-build:
+  Linux-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
