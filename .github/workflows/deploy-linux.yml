@@ -3,12 +3,25 @@ on:
   push:
     branches: [ master ]
 jobs:
-  snap-build:
+  Linux-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup npm package
+        uses: actions/checkout@v2
+      - name: cache node module
+        id: myCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        if: steps.myCacheStep.outputs.cache-hit != 'true'
         run: npm install
       - name: Build Using npm
         run: node_modules/.bin/ng build
@@ -22,3 +35,6 @@ jobs:
           store_login: ${{ secrets.STORE_LOGIN }}
           snap: ${{ steps.build.outputs.snap }}
           release: edge
+
+
+      
