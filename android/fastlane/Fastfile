@@ -15,9 +15,9 @@ end
 
 lane :build_and_distribute do
   run_unit_tests()
-  increment_version_code_in_project_gradle()
-  build()
-  distribute_playstore()
+  # increment_version_code_in_project_gradle()
+  # build()
+  # distribute_playstore()
 end
 
 
