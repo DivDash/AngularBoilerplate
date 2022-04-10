@@ -77,19 +77,20 @@ jobs:
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           ls
           pwd
-          cd ..
-          cd ..
           ls
+          cd ..
+          cd ..
           pwd
+          ls
           bundle install 
           cd fastlane
           cd certificate
-          ls
           pwd
+          ls
           cd ..
           cd ..
           ls
-          bundle exec fastlane build_and_distribute
+          fastlane build_and_distribute
 
 #       - name: Create Google Play Config file
 #         run : |
