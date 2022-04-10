@@ -55,12 +55,10 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
         run: |
-          cd android
-          cd fastlane
-          ls
+          cd android/fastlane
           touch .env.secret
-          echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" >> .env.secret
-          echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" >> .env.secret
+          echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
+          echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secret
           ls
 
 #       - name: Create Google Play Config file
