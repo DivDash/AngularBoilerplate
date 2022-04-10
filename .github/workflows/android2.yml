@@ -38,7 +38,7 @@ jobs:
           PLAY_CONFIG_JSON: ${{secrets.PLAY_CONFIG_JSON}}
         run: |
           pwd
-          FILE_PATH=fastlane/certificate
+          FILE_PATH=/home/runner/work/AngularBoilerplate/AngularBoilerplate/android/fastlane/certificate
           echo $PLAY_CONFIG_JSON | base64 -di > Dir.pwd + "${FILE_PATH}"/playstore-app-distribution-key.json
           
       - name: Decode and create keystore file
