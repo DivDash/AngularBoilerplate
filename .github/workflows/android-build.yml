@@ -60,6 +60,15 @@ jobs:
           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secret
           ls -a
+          mkdir certificate
+          cd certificate
+          ls
+          echo "$PLAY_CONFIG_JSON" > playstore-app-distribution-key.json.b64
+          base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
+          ls -a
+          echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
+          base64 -d -i my-release-key.jks.b64 > my-release-key.jks
+          ls -a
 
 #       - name: Create Google Play Config file
 #         run : |
