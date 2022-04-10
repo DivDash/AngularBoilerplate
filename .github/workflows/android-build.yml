@@ -50,10 +50,6 @@ jobs:
           bundle config --global set deploy_platform_default x86_64-linux
           bundle install 
 
-      path: ./package.json
-   
-    
-    
       - name: Create and populate .env.secret file
         id: package
         uses: juliangruber/read-file-action@v1
