@@ -38,8 +38,8 @@ jobs:
           PLAY_CONFIG_JSON: ${{secrets.PLAY_CONFIG_JSON}}
         run: |
           pwd
-          FILE_PATH=certificate
-          echo $PLAY_CONFIG_JSON | base64 -di > "${FILE_PATH}"/playstore-app-distribution-key.json
+          FILE_PATH=fastlane/certificate
+          echo $PLAY_CONFIG_JSON | base64 -di > Dir.pwd + "${FILE_PATH}"/playstore-app-distribution-key.json
           
       - name: Decode and create keystore file
         working-directory: android
