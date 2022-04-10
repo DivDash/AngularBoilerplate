@@ -55,7 +55,14 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
         run: |
-          cd android/fastlane
+          cd android
+          ls
+          chmod +x gradlew
+          export LC_ALL=en_US.UTF-8
+          export LANG=en_US.UTF-8
+          git config --global user.email ${{github.event.pusher.email}}
+          git config --global user.name ${{github.event.pusher.name}}
+          cd fastlane
           touch .env.secret
           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secret
@@ -65,18 +72,18 @@ jobs:
           ls
           echo "$PLAY_CONFIG_JSON" > playstore-app-distribution-key.json.b64
           base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
-          ls -a
+          ls 
           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
-          ls -a
+          ls 
           cd ..
           cd ..
           ls
-          chmod +x gradlew
-          export LC_ALL=en_US.UTF-8
-          export LANG=en_US.UTF-8
-          git config --global user.email ${{github.event.pusher.email}}
-          git config --global user.name ${{github.event.pusher.name}}
+          cwd
+          cd fastlane>certificate
+          ls
+          cd ..
+          cd ..
           bundle exec fastlane build_and_distribute
 
 #       - name: Create Google Play Config file
