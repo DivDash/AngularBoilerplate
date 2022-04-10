@@ -53,9 +53,7 @@ jobs:
         run: |
           pwd
           ls
-          cd fastlane
-          mkdir certificate
-          cd certificate
+          cd fastlane/certificate
           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
 
