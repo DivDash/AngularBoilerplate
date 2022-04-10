@@ -101,6 +101,9 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
         run: |
           ls
+          cd app
+          ls
+          cd ..
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
           gradle wrapper
