@@ -59,7 +59,7 @@ jobs:
           touch .env.secret
           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secret
-          ls
+          ls -a
 
 #       - name: Create Google Play Config file
 #         run : |
