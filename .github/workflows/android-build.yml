@@ -52,6 +52,7 @@ jobs:
 
       - name: Build and distribute app
         run: |
+          cd android
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
           git config --global user.email ${{github.event.pusher.email}}
