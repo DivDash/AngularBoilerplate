@@ -51,8 +51,6 @@ jobs:
           bundle install 
 
       - name: Create and populate .env.secret file
-        id: package
-        uses: juliangruber/read-file-action@v1
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
