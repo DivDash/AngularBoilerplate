@@ -78,9 +78,5 @@ after_all do
   )
   
   push_to_git_remote(
-    local_branch: buildConfigs.key(options[:buildConfig]),
-    remote: "origin",
-    remote_branch: buildConfigs.key(options[:buildConfig]),
-    tags: true,
   )
 end
