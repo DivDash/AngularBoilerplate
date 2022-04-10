@@ -82,6 +82,13 @@ jobs:
           ls
           pwd
           bundle install 
+          cd fastlane
+          cd certificate
+          ls
+          pwd
+          cd ..
+          cd ..
+          ls
           bundle exec fastlane build_and_distribute
 
 #       - name: Create Google Play Config file
