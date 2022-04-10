@@ -64,14 +64,14 @@ end
   end
 
 
-desc "After successful execution of all task, this block is called"
-after_all do
-  git_add(path: "*")
-  git_commit(
-    path: "*",
-    message: "#" + "UPDATED_VERSION_CODE" + " released"
-  )
+# desc "After successful execution of all task, this block is called"
+# after_all do
+#   git_add(path: "*")
+#   git_commit(
+#     path: "*",
+#     message: "#" + "UPDATED_VERSION_CODE" + " released"
+#   )
   
-  push_to_git_remote(
-  )
-end
+#   push_to_git_remote(
+#   )
+# end
