@@ -40,25 +40,25 @@ jobs:
         env:
           PLAY_CONFIG_JSON: ${{secrets.PLAY_CONFIG_JSON}}
         run: |
-          pwd
-          ls
           cd fastlane
           mkdir certificate
           cd certificate
           echo "$PLAY_CONFIG_JSON" > playstore-app-distribution-key.json.b64
           base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
-          
-          
-      - name: Decode and create keystore file
-        working-directory: android
-        env:
-          ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
-        run: |
           pwd
           ls
-          cd fastlane/certificate
-          echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
-          base64 -d -i my-release-key.jks.b64 > my-release-key.jks
+          
+          
+#       - name: Decode and create my-release-key file
+#         working-directory: android
+#         env:
+#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+#         run: |
+#           pwd
+#           ls
+#           cd fastlane/certificate
+#           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
+#           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           
       - name: Decode and create keystore file
         working-directory: android
@@ -66,35 +66,33 @@ jobs:
           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
         run: |
           cd app
-          pwd
-          ls
           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
+          pwd
+          ls
           
       - name: create keystore file
         working-directory: android
         env:
           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
         run: |
-          pwd
-          ls
           echo storeFile="my-release-key.jks" > keystore.properties
           echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
           echo keyAlias="$KEYSTORE_ALIAS" > keystore.properties
           echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
+          pwd
+          ls
           
-      - name: Decode and create env.secret
-        working-directory: android
-        env:
-          KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
-        run: |
-          cd fastlane
-          pwd
-          ls
-          echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
-          echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secrets
-          pwd
-          ls
+#       - name: Decode and create env.secret
+#         working-directory: android
+#         env:
+#           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
+#         run: |
+#           cd fastlane
+#           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
+#           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secrets
+#           pwd
+#           ls
 
       - name: Build and distribute app
         working-directory: android
