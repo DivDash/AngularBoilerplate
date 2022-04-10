@@ -24,6 +24,9 @@ jobs:
 
       - name: Setup android SDK
         uses: android-actions/setup-android@v2
+        
+      - name: Install npm dependencies
+        run:  npm install
 
       - name: Install dependencies to support ruby project
         working-directory: android
