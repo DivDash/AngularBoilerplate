@@ -59,17 +59,9 @@ jobs:
           cd fastlane
           ls
           touch .env.secret
-          echo aws_host="$KEYSTORE_PASSWORD" >> .env.secret
-          echo aws_port="$KEYSTORE_ALIAS" >> .env.secret
-          echo "cat .env.secret"
-          cat .env.secret
-
-          echo "ls -a ."
-          ls -a .
-
-          echo "ls -a ${{ github.workspace }}"
-          ls -a ${{ github.workspace }}
-        shell: bash
+          echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" >> .env.secret
+          echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" >> .env.secret
+          ls
 
 #       - name: Create Google Play Config file
 #         run : |
