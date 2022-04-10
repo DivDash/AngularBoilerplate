@@ -1,0 +1,7 @@
+/build/*
+!/build/.npmkeep
+
+keystore/
+proguard-rules.pro
+
+# !/build/outputs/bundle/release/app-release.aab
