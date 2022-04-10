@@ -38,28 +38,34 @@ jobs:
           PLAY_CONFIG_JSON: ${{secrets.PLAY_CONFIG_JSON}}
         run: |
           pwd
+          ls
           cd fastlane
           mkdir certificate
           cd certificate
           echo "$PLAY_CONFIG_JSON" > playstore-app-distribution-key.json.b64
           base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
-          ls
+          
           
       - name: Decode and create keystore file
         working-directory: android
         env:
           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
         run: |
-          FILE_PATH=certificate
-          echo $ANDROID_KEYSTORE_FILE | base64 -di > "${FILE_PATH}"/my-release-key.jks
+          pwd
+          ls
+          cd fastlane
+          mkdir certificate
+          cd certificate
+          echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
+          base64 -d -i my-release-key.jks.b64 > my-release-key.jks
 
-  
       - name: Build and distribute app
         working-directory: android
         env:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
         run: |
+          ls
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
           gradle wrapper
