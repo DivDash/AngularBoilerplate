@@ -45,9 +45,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - name: Install dependencies to support ruby project
-        run:  bundle install
-        
-#                   bundle config --global set deploy_platform_default x86_64-linux
+        run:  |
+          cd android
+          bundle config --global set deploy_platform_default x86_64-linux
+          bundle install       
 
       - name: Build and distribute app
         run: |
