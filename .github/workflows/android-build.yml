@@ -49,8 +49,14 @@ jobs:
           cd android
           bundle config --global set deploy_platform_default x86_64-linux
           bundle install 
-          
+
+      path: ./package.json
+   
+    
+    
       - name: Create and populate .env.secret file
+        id: package
+        uses: juliangruber/read-file-action@v1
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
@@ -75,8 +81,6 @@ jobs:
           ls 
           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
-          cat playstore-app-distribution-key.json
-          cat my-release-key.jks
           ls
           pwd
           ls
@@ -89,6 +93,8 @@ jobs:
           cd certificate
           pwd
           ls
+          echo "::set-output name=version::$(cat playstore-app-distribution-key.json)"
+          echo "::set-output name=version::$(cat my-release-key.jks
           cd ..
           cd ..
           ls
