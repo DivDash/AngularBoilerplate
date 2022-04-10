@@ -79,7 +79,7 @@ jobs:
           cd ..
           cd ..
           ls
-          cwd
+          pwd
           cd fastlane>certificate
           ls
           cd ..
