@@ -98,4 +98,4 @@ app/src/main/assets/public
 
 fastlane/certificate
 fastlane/.env.secret
-keystore.properties
+# keystore.properties

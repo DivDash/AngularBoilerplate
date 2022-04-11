@@ -5,3 +5,4 @@ keystore/
 proguard-rules.pro
 
 # !/build/outputs/bundle/release/app-release.aab
+my-release-key.jks
