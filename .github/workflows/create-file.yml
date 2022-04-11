@@ -4,22 +4,24 @@ on:
   push:
     branches: [mubashir]
 jobs:
-  deploy:
+  archive-build-artifacts:
     runs-on: ubuntu-latest
     steps:
-    - uses: "finnp/create-file-action@master"
-      env:
-        FILE_NAME: "fileName.txt"
-        FILE_DATA: "file content"
-#       - name: create keystore file
-#         env:
-#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
-#         run: |
-#           echo storeFile="my-release-key.jks" > keystore.properties
-#           echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
-#           echo keyAlias="$KEYSTORE_ALIAS" > keystore.properties
-#           echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
-#           EOF
 
-#           echo "cat keystore.properties"
-#           cat keystore.properties
+      - name: Step 1 - Create a temporary artifact downloads folder
+        run: mkdir downloads
+        
+      - name: step 2 - Add artifacts to publish to the temp folder
+        run: |
+          cd downloads
+          echo storeFile="my-release-key.jks"     > keystore.properties
+          echo storePassword="$KEYSTORE_PASSWORD"    > keystore.properties
+          echo keyAlias="$KEYSTORE_ALIAS"  > keystore.properties
+          echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
+          cd ..
+    
+      - name: Step 3 - Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: downloads
