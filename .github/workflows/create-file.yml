@@ -18,9 +18,9 @@ jobs:
         
         run: |
           cd downloads
-          echo storeFile=my-release-key.jks     > keystore.properties
-          echo storePassword="$KEYSTORE_KEY_PASSWORD"    > keystore.properties
-          echo keyAlias="$KEYSTORE_KEY_ALIAS"  > keystore.properties
+          echo storeFile=my-release-key.jks > keystore.properties
+          echo storePassword="$KEYSTORE_KEY_PASSWORD" > keystore.properties
+          echo keyAlias="$KEYSTORE_KEY_ALIAS" > keystore.properties
           echo keyPassword="$KEYSTORE_KEY_PASSWORD" > keystore.properties
           cd ..
     
