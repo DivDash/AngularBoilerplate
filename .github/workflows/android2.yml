@@ -61,28 +61,28 @@ jobs:
 #           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
      
      
-#       - name: Decode and create keystore file
-#         working-directory: android
-#         env:
-#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
-#         run: |
-#           cd app
-#           echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
-#           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
-#           pwd
-#           ls
-          
-      - name: create keystore file
+      - name: Decode and create keystore file
         working-directory: android
         env:
           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
         run: |
-          echo storeFile=my-release-key.jks >> keystore.properties
-          echo storePassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
-          echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
-          echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+          cd app
+          echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
+          base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           pwd
           ls
+          
+#       - name: create keystore file
+#         working-directory: android
+#         env:
+#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+#         run: |
+#           echo storeFile=my-release-key.jks >> keystore.properties
+#           echo storePassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+#           echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
+#           echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+#           pwd
+#           ls
           
           
           
