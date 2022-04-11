@@ -77,12 +77,15 @@ jobs:
         env:
           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
         run: |
-          echo storeFile="my-release-key.jks" > keystore.properties
-          echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
-          echo keyAlias="$KEYSTORE_ALIAS" > keystore.properties
-          echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
+          echo storeFile=my-release-key.jks >> keystore.properties
+          echo storePassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+          echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
+          echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
           pwd
           ls
+          
+          
+          
           
 #       - name: Decode and create env.secret
 #         working-directory: android
