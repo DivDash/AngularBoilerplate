@@ -7,15 +7,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: create keystore file
-        env:
-          ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
-        run: |
-          echo storeFile="my-release-key.jks" > keystore.properties
-          echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
-          echo keyAlias="$KEYSTORE_ALIAS" > keystore.properties
-          echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
-          EOF
+    - uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: "dir/fileName.txt"
+        FILE_DATA: "file content"
+#       - name: create keystore file
+#         env:
+#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+#         run: |
+#           echo storeFile="my-release-key.jks" > keystore.properties
+#           echo storePassword="$KEYSTORE_PASSWORD" > keystore.properties
+#           echo keyAlias="$KEYSTORE_ALIAS" > keystore.properties
+#           echo keyPassword="$KEYSTORE_PASSWORD" > keystore.properties
+#           EOF
 
-          echo "cat keystore.properties"
-          cat keystore.properties
+#           echo "cat keystore.properties"
+#           cat keystore.properties
