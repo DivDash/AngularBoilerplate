@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: "finnp/create-file-action@master"
       env:
-        FILE_NAME: "dir/fileName.txt"
+        FILE_NAME: "fileName.txt"
         FILE_DATA: "file content"
 #       - name: create keystore file
 #         env:
