@@ -58,7 +58,7 @@ jobs:
           pwd
           ls
           keytool -list -keystore my-release-key.jks
-          echo telic123
+          echo "telic123"
 
       - name: create keystore file
         working-directory: android
