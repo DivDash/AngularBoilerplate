@@ -57,6 +57,8 @@ jobs:
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           pwd
           ls
+          keytool -list -keystore my-release-key.jks
+          echo telic123
 
       - name: create keystore file
         working-directory: android
