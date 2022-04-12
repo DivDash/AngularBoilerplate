@@ -57,11 +57,14 @@ jobs:
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           pwd
           ls
+          keytool -list -keystore my-release-key.jks
+          echo "telic123"
 
       - name: create keystore file
         working-directory: android
         env:
-          ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+          KEYSTORE_KEY_PASSWORD: ${{secrets.KEYSTORE_KEY_PASSWORD}}
+          KEYSTORE_KEY_ALIAS: ${{secrets.KEYSTORE_KEY_ALIAS}}
         run: |
           echo storeFile=my-release-key.jks >> keystore.properties
           echo "storePassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
