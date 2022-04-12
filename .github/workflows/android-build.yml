@@ -24,9 +24,9 @@ jobs:
 
       - name: Setup android SDK
         uses: android-actions/setup-android@v2
-        
+
       - name: Install npm dependencies
-        run:  npm install
+        run: npm install
 
       - name: Install dependencies to support ruby project
         working-directory: android
@@ -34,7 +34,6 @@ jobs:
           bundle config --global set deploy_platform_default x86_64-linux
           bundle install
 
-          
       - name: Decode and create Playstore app distribution key file
         working-directory: android
         env:
@@ -47,8 +46,7 @@ jobs:
           base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
           pwd
           ls
-     
-     
+
       - name: Decode and create keystore file
         working-directory: android
         env:
@@ -59,30 +57,29 @@ jobs:
           base64 -d -i my-release-key.jks.b64 > my-release-key.jks
           pwd
           ls
-          
-#       - name: create keystore file
-#         working-directory: android
-#         env:
-#           ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
-#         run: |
-#           echo storeFile=my-release-key.jks >> keystore.properties
-#           echo storePassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
-#           echo keyAlias="$KEYSTORE_KEY_ALIAS" >> keystore.properties
-#           echo keyPassword="$KEYSTORE_KEY_PASSWORD" >> keystore.properties
-#           pwd
-#           ls
-          
-              
-#       - name: Decode and create env.secret
-#         working-directory: android
-#         env:
-#           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
-#         run: |
-#           cd fastlane
-#           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
-#           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secrets
-#           pwd
-#           ls
+
+      - name: create keystore file
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+        run: |
+          echo storeFile=my-release-key.jks >> keystore.properties
+          echo "storePassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> keystore.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+          pwd
+          ls
+
+      #       - name: Decode and create env.secret
+      #         working-directory: android
+      #         env:
+      #           KEYSTORE_PASSWORD: ${{secrets.KEYSTORE_PASSWORD}}
+      #         run: |
+      #           cd fastlane
+      #           echo KEYSTORE_PASSWORD="$KEYSTORE_PASSWORD" > .env.secret
+      #           echo KEYSTORE_ALIAS="$KEYSTORE_ALIAS" > .env.secrets
+      #           pwd
+      #           ls
 
       - name: Build and distribute app
         working-directory: android
@@ -91,9 +88,6 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
         run: |
           ls
-          cd app
-          ls
-          cd ..
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
           gradle wrapper
