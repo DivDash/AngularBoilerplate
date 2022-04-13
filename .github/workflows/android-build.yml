@@ -1,8 +1,5 @@
 name: Android build
-# 'on': pull_request.
-on:
-  push:
-    branches: [mubashir]
+'on': pull_request
 jobs:
   Andorid-Publish:
     runs-on: ubuntu-latest
