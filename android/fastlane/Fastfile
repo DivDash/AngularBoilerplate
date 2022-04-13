@@ -1,14 +1,9 @@
-fastlane_require "dotenv"
-
 PACKAGE_NAME = "com.angularboilerplate.app"
-KEYSTORE_PATH = nil
 PLAYSTORE_KEY_PATH = nil
 BUNDLE_FILE_PATH = nil
 UPDATED_VERSION_CODE = nil
 
 before_all do
-  Dotenv.overload ".env.secret"
-  KEYSTORE_PATH = Dir.pwd + "/certificate/my-release-key.jks"
   PLAYSTORE_KEY_PATH =Dir.pwd + "/certificate/playstore-app-distribution-key.json"
   BUNDLE_FILE_PATH = "./app/build/outputs/bundle/release/app-release.aab"
 end
@@ -50,8 +45,7 @@ private_lane :build do
   gradle(
     task: "bundle",
     build_type: "Release",
-    properties: {
-    }
+    properties: {}
   )
 end
 
@@ -63,16 +57,3 @@ end
     )
     
   end
-
-
-# desc "After successful execution of all task, this block is called"
-# after_all do
-#   git_add(path: "*")
-#   git_commit(
-#     path: "*",
-#     message: "#" + "UPDATED_VERSION_CODE" + " released"
-#   )
-  
-#   push_to_git_remote(
-#   )
-# end

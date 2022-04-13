@@ -1,4 +1,5 @@
 name: Android build
+# 'on': pull_request.
 on:
   push:
     branches: [mubashir]
@@ -25,7 +26,22 @@ jobs:
       - name: Setup android SDK
         uses: android-actions/setup-android@v2
 
-      - name: Install npm dependencies
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: cache node module
+        id: myCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install npm Dependencies
+        if: steps.myCacheStep.outputs.cache-hit != 'true'
         run: npm install
 
       - name: Install dependencies to support ruby project
@@ -64,7 +80,6 @@ jobs:
           echo "storePassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
           echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> keystore.properties
           echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
-
 
       - name: Build and distribute app
         working-directory: android
