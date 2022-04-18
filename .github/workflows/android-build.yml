@@ -1,0 +1,91 @@
+name: Android build
+'on': pull_request
+jobs:
+  Andorid-Publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: 11
+
+      - name: Setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+
+      - name: Setup android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: cache node module
+        id: myCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install npm Dependencies
+        if: steps.myCacheStep.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Install dependencies to support ruby project
+        working-directory: android
+        run: |
+          bundle config --global set deploy_platform_default x86_64-linux
+          bundle install
+
+      - name: Decode and create Playstore app distribution key file
+        working-directory: android
+        env:
+          PLAY_CONFIG_JSON: ${{secrets.PLAY_CONFIG_JSON}}
+        run: |
+          cd fastlane
+          mkdir certificate
+          cd certificate
+          echo "$PLAY_CONFIG_JSON" > playstore-app-distribution-key.json.b64
+          base64 -d -i playstore-app-distribution-key.json.b64 > playstore-app-distribution-key.json
+
+      - name: Decode and create keystore file
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_FILE: ${{secrets.ANDROID_KEYSTORE_FILE}}
+        run: |
+          cd app
+          echo "$ANDROID_KEYSTORE_FILE" > my-release-key.jks.b64
+          base64 -d -i my-release-key.jks.b64 > my-release-key.jks
+
+      - name: create keystore file
+        working-directory: android
+        env:
+          KEYSTORE_KEY_PASSWORD: ${{secrets.KEYSTORE_KEY_PASSWORD}}
+          KEYSTORE_KEY_ALIAS: ${{secrets.KEYSTORE_KEY_ALIAS}}
+        run: |
+          echo storeFile=my-release-key.jks >> keystore.properties
+          echo "storePassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+          echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> keystore.properties
+          echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+
+      - name: Build and distribute app
+        working-directory: android
+        env:
+          KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+          KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+        run: |
+          ls
+          export LC_ALL=en_US.UTF-8
+          export LANG=en_US.UTF-8
+          gradle wrapper
+          bundle exec fastlane build_and_distribute
