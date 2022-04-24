@@ -57,3 +57,12 @@ end
     )
     
   end
+
+desc "Build the .aab file"
+lane :buildAndroid do
+    gradle(
+      task: "bundle",
+      build_type: "Release",
+      properties: {}
+    )
+  end
