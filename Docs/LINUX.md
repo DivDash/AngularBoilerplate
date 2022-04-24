@@ -14,6 +14,12 @@ Run npm install
 npm install
 ```
 
+Firstly build the project before building the package.
+
+```sh
+npm run build
+```
+
 Install snapcraft for releasing .snap of your electron app to Snapcraft
 
 ```sh
@@ -38,13 +44,13 @@ Then set "name" key with registered app name in ./package.json
 Also set "name" key with registered app name in snap/snapcraft.yaml
 ![](images/../../images/snapcraft.png)
 
-Run npm run electron:package to build .snap file of your Electron App
+Run npm run package-linux to build .snap file of your Electron App
 
 ```sh
 npm run package-linux
 ```
 
-A "release" folder will be created in the root directory of your project with .snap file of your electron app.
+A "release-builds" folder will be created in the root directory of your project having linux folder with .snap file of your electron app.
 
 Return to the terminal and the location of your .snap file ("release" folder). You now need to authenticate the snapcraft command using your Snapcraft developer account credentials. This can be accomplished with the following:
 
@@ -66,12 +72,54 @@ You can also install your app via:
 sudo snap install <app-name>
 ```
 
-### Actions
+## Actions
 
 This is a Github Action that can be used to publish [snap
 packages](https://snapcraft.io) to the Snap Store built by [snapcore](https://github.com/snapcore/action-publish).
 
 ![](images/../../images/action.png)
+
+Actions for Linux:
+
+```sh
+name: Linux Deploy on Merge
+on:
+  push:
+    branches: [ master ]
+jobs:
+  Linux-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: cache node module
+        id: myCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        if: steps.myCacheStep.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Build Using npm
+        run: node_modules/.bin/ng build
+      - name: snap package
+        run: npm run package-linux
+      - uses: actions/checkout@v2
+      - uses: snapcore/action-build@v1
+        id: build
+      - uses: snapcore/action-publish@v1
+        with:
+          store_login: ${{ secrets.STORE_LOGIN }}
+          snap: ${{ steps.build.outputs.snap }}
+          release: edge
+```
 
 This action is already written in [.github/workflows/sanpcraft.yaml](https://github.com/TelicSolutionsInc/AngularBoilerplate/blob/master/.github/workflows/deploy-linux.yml), you have to first produce data using command below:
 
