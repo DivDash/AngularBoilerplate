@@ -26,7 +26,7 @@ jobs:
       - name: Build Using npm
         run: npm run build
       - name: win package
-        run: npm run package-mac
+        run: npm run package-win
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
