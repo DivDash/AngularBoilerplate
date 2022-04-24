@@ -1,7 +1,8 @@
 name: Linux Build on PR
-on:
-  push:
-    branches: [ master ]
+# on:
+#   push:
+#     branches: [ master ]
+'on': pull_request
 jobs:
   Win-Release:
     runs-on: windows-latest
