@@ -1,5 +1,6 @@
 name: Linux Build on PR
-'on': push
+# 'on': push
+'on': pull_request
 jobs:
   Win-build:
     runs-on: windows-latest
