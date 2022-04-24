@@ -1,8 +1,8 @@
 name: Linux Build on PR
-# on:
-#   push:
-#     branches: [ master ]
-'on': push
+on:
+  push:
+    branches: [ master ]
+# 'on': push
 # 'on': pull_request
 jobs:
   Win-Release:
@@ -32,5 +32,5 @@ jobs:
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
-          name: Download Win Release
+          name: Windows Release Folder
           path: release-builds
