@@ -1,7 +1,7 @@
 name: Linux Build on PR
 'on': push
 jobs:
-  Linux-build:
+  Mac-Release:
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -28,5 +28,5 @@ jobs:
       - name: Use the Upload Artifact GitHub Action
         uses: actions/upload-artifact@v2
         with: 
-          name: Download Windows Release
+          name: Download Mac Release Fodler
           path: release-builds
