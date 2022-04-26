@@ -1,0 +1,21 @@
+name: iOS binary build & upload
+'on': push
+jobs:
+ deploy:
+   runs-on: macos-latest
+   steps:
+     - uses: actions/checkout@v2
+ 
+     - name: Set up ruby env
+       uses: ruby/setup-ruby@v1
+       with:
+         ruby-version: 2.7.2
+         bundler-cache: true
+    
+     - name: Build & upload iOS binary
+       working-directory: ios/App
+       run: |
+        ls
+        npm install
+        bundle install
+        bundle exec fastlane beta

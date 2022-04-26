@@ -1,0 +1,36 @@
+name: Linux Build on PR
+on:
+  push:
+    branches: [ master ]
+# 'on': push
+# 'on': pull_request
+jobs:
+  Win-Release:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: cache node module
+        id: myCacheStep
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Install Dependencies
+        if: steps.myCacheStep.outputs.cache-hit != 'true'
+        run: npm install
+      - name: Build Using npm
+        run: npm run build
+      - name: win package
+        run: npm run package-win
+      - name: Use the Upload Artifact GitHub Action
+        uses: actions/upload-artifact@v2
+        with: 
+          name: Windows Release Folder
+          path: release-builds

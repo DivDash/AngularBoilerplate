@@ -1,7 +1,9 @@
-name: Android build
-'on': pull_request
+name: Android build      
+on:
+  push:
+    branches: [ master ]
 jobs:
-  Andorid-Build:
+  Andorid-Publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
@@ -78,7 +80,7 @@ jobs:
           echo "keyAlias=$KEYSTORE_KEY_ALIAS" >> keystore.properties
           echo "keyPassword=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
 
-      - name: Build Android App
+      - name: Build and distribute app
         working-directory: android
         env:
           KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
@@ -88,4 +90,4 @@ jobs:
           export LC_ALL=en_US.UTF-8
           export LANG=en_US.UTF-8
           gradle wrapper
-          bundle exec fastlane buildAndroid
+          bundle exec fastlane build_and_distribute
