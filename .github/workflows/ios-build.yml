@@ -14,4 +14,8 @@ jobs:
     
      - name: Build & upload iOS binary
        working-directory: ios/App
-       run: bundle exec fastlane beta
+       run: |
+        ls
+        npm install
+        bundle install
+        bundle exec fastlane beta
